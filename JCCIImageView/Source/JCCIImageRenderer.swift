@@ -59,8 +59,7 @@ class JCCIImageMetalRenderer: NSObject, JCCIImageRenderer, MTKViewDelegate{
         _view.framebufferOnly = false
         _view.enableSetNeedsDisplay = true
         
-        self.context = CIContext(mtlDevice: device,
-                                 options: [.workingColorSpace : CGColorSpaceCreateDeviceRGB()])
+        self.context = CIContext(mtlDevice: device)
         self.commandQueue = device.makeCommandQueue()
     }
     
@@ -108,8 +107,7 @@ class JCCIImageGLKRenderer: NSObject, JCCIImageRenderer, GLKViewDelegate {
     
     init(_ GLContext:EAGLContext) {
         super.init()
-        self.context = CIContext(eaglContext: GLContext,
-                                 options: [.workingColorSpace : CGColorSpaceCreateDeviceRGB()])
+        self.context = CIContext()
         _view = GLKView(frame: CGRect.zero, context: GLContext)
         _view.delegate = self
         _view.contentScaleFactor = UIScreen.main.scale
@@ -150,7 +148,7 @@ class JCCIImageCoreGraphicsRenderer: NSObject, JCCIImageRenderer {
     override init() {
         super.init()
         _view = ImageView(frame: CGRect.zero)
-        self.context = CIContext(options: [.workingColorSpace : CGColorSpaceCreateDeviceRGB()])
+        self.context = CIContext()
     }
     
     func renderImage(_ image: CIImage?) {
