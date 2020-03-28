@@ -107,7 +107,7 @@ class JCCIImageGLKRenderer: NSObject, JCCIImageRenderer, GLKViewDelegate {
     
     init(_ GLContext:EAGLContext) {
         super.init()
-        self.context = CIContext()
+        self.context = CIContext(eaglContext: GLContext)
         _view = GLKView(frame: CGRect.zero, context: GLContext)
         _view.delegate = self
         _view.contentScaleFactor = UIScreen.main.scale
